@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/book")
 public class BookController {
 
     private BookService BookService;
@@ -23,11 +25,10 @@ public class BookController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            path = "/books",
             consumes = "application/json",
             produces = "application/json")
     @ResponseBody
-    public Page<BookEntity> getBooks(@RequestBody BooksRequest booksRequest) {
+    public Page<BookEntity> getList(@RequestBody BooksRequest booksRequest) {
         logger.info(booksRequest.toString());
         if (booksRequest.getRevert()) {
             return BookService.getBooks(PageRequest.of(booksRequest.getPage(), booksRequest.getCount(), Sort.by(booksRequest.getTypeSort()).descending()));
@@ -37,22 +38,22 @@ public class BookController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            path = "/book/{id}",
+            path = "/{id}",
             consumes = "application/json",
             produces = "application/json")
     @ResponseBody
-    public BookEntity get(@PathVariable Long id) {
-        return BookService.get(id);
+    public ResponseEntity<BookEntity> get(@PathVariable Long id) {
+        return ResponseEntity.ok(BookService.get(id));
     }
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            path = "/book/{id}",
+            path = "/{id}",
             consumes = "application/json",
             produces = "application/json")
     @ResponseBody
-    public BookEntity delete(@PathVariable Long id) {
-        return BookService.get(id);
+    public void delete(@PathVariable Long id) {
+        BookService.delete(id);
     }
 
 
