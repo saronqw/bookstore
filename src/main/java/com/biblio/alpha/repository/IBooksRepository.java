@@ -7,4 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface IBooksRepository extends PagingAndSortingRepository<BookEntity, Long> {
     Page<BookEntity> findAll(Pageable pageable);
+    BookEntity findAllByBookId(Long id);
+    void deleteByBookId(Long id);
 }
