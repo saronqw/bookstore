@@ -1,5 +1,6 @@
 package com.biblio.alpha.entity;
 
+import com.biblio.alpha.model.api.request.BookParamsRequest;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -12,6 +13,27 @@ public class BookEntity {
 
     public BookEntity() {
 
+    }
+
+    public void edit(BookParamsRequest bookParamsRequest) {
+        this.author = bookParamsRequest.getAuthor();
+        this.cover = bookParamsRequest.getCover();
+        this.date = bookParamsRequest.getDate();
+        this.editor = bookParamsRequest.getEditor();
+        this.genre = bookParamsRequest.getGenre();
+        this.height = bookParamsRequest.getHeight();
+        this.language = bookParamsRequest.getLanguage();
+        this.length = bookParamsRequest.getLength();
+        this.pageNumber = bookParamsRequest.getPageNumber();
+        this.price = bookParamsRequest.getPrice();
+        this.publisher = bookParamsRequest.getPublisher();
+        this.rating = bookParamsRequest.getRating();
+        this.series = bookParamsRequest.getSeries();
+        this.title = bookParamsRequest.getTitle();
+        this.translator = bookParamsRequest.getTranslator();
+        this.url = bookParamsRequest.getUrl();
+        this.weight = bookParamsRequest.getWeight();
+        this.width = bookParamsRequest.getWidth();
     }
 
     @Id
@@ -78,7 +100,8 @@ public class BookEntity {
     @Column(name = "length")
     private Long length;
 
-    @Size(min = 1, max = 10, message = "The value must be range of 1 to 10") // какая-то проблема с ним везде (в H2)
+    @Min(value = 1, message = "The value must be range of 1 to 10")
+    @Max(value = 10, message = "The value must be range of 1 to 10")
     @Column(name = "rating")
     private Long rating;
 

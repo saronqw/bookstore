@@ -1,6 +1,7 @@
 package com.biblio.alpha.service;
 
 import com.biblio.alpha.entity.BookEntity;
+import com.biblio.alpha.model.api.request.BookParamsRequest;
 import com.biblio.alpha.repository.IBooksRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,8 +22,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookEntity get(Long id) {
+    public BookEntity getBookById(Long id) {
         return booksRepository.findAllByBookId(id);
+    }
+
+    @Override
+    public Boolean editBook(BookParamsRequest bookParamsRequest, Long id) {
+        BookEntity currentBook = getBookById(id);
+        currentBook.edit(bookParamsRequest);
+        booksRepository.save(currentBook);
+        return true;
     }
 
     @Override
