@@ -1,5 +1,6 @@
 package com.biblio.alpha.entity;
 
+import com.biblio.alpha.entity.purchase.PurchaseEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.validation.annotation.Validated;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Validated
 @Entity
@@ -31,8 +33,15 @@ public class OrderEntity {
     @JoinColumn(name = "customer_id")
     private CustomerEntity customerId;
 
+    @OneToMany(mappedBy = "id.orderEntity", cascade = CascadeType.ALL)
+    private List<PurchaseEntity> purchaseEntityList;
+
     public Long getOrderId() {
         return orderId;
+    }
+
+    public List<PurchaseEntity> getPurchaseEntityList() {
+        return purchaseEntityList;
     }
 
     public void setOrderId(Long orderId) {
@@ -53,6 +62,10 @@ public class OrderEntity {
 
     public void setCustomerId(CustomerEntity customerId) {
         this.customerId = customerId;
+    }
+
+    public void setPurchaseEntityList(List<PurchaseEntity> purchaseEntityList) {
+        this.purchaseEntityList = purchaseEntityList;
     }
 
     @Override

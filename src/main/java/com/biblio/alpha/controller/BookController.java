@@ -22,8 +22,8 @@ public class BookController {
 
     Logger logger = LoggerFactory.getLogger(BookController.class);
 
-    public BookController(BookService BookService) {
-        this.bookService = BookService;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @RequestMapping(

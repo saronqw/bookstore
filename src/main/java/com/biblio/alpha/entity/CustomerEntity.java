@@ -4,6 +4,8 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Validated
 @Entity
@@ -18,6 +20,10 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
+
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
+    private List<OrderEntity>orderEntityList;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -27,6 +33,9 @@ public class CustomerEntity {
     @Column(name = "middle_name")
     private String middleName;
 
+    public List<OrderEntity> getOrderEntityList() {
+        return orderEntityList;
+    }
 
     @PrePersist
     public void prePersist() {
@@ -104,6 +113,10 @@ public class CustomerEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setOrderEntityList(List<OrderEntity> orderEntityList) {
+        this.orderEntityList = orderEntityList;
     }
 
     public void setPassword(String password) {

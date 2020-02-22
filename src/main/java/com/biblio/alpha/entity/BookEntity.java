@@ -1,10 +1,15 @@
 package com.biblio.alpha.entity;
 
+import com.biblio.alpha.entity.purchase.PurchaseEntity;
+import com.biblio.alpha.entity.purchase.PurchaseId;
 import com.biblio.alpha.model.api.request.BookParamsRequest;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.awt.print.Book;
+import java.util.ArrayList;
+import java.util.List;
 
 @Validated
 @Entity
@@ -40,6 +45,9 @@ public class BookEntity {
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
+
+    /*@OneToMany(mappedBy = "id.bookEntity", cascade = CascadeType.ALL)
+    private List<PurchaseEntity> purchaseEntityList = new ArrayList<>();*/
 
     @NotNull(message = "The value must be not null")
     @Column(name = "title")
