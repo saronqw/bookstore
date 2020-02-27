@@ -1,15 +1,10 @@
 package com.biblio.alpha.entity;
 
-import com.biblio.alpha.entity.purchase.PurchaseEntity;
-import com.biblio.alpha.entity.purchase.PurchaseId;
 import com.biblio.alpha.model.api.request.BookParamsRequest;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.awt.print.Book;
-import java.util.ArrayList;
-import java.util.List;
 
 @Validated
 @Entity
@@ -112,6 +107,12 @@ public class BookEntity {
     @Max(value = 10, message = "The value must be range of 1 to 10")
     @Column(name = "rating")
     private Long rating;
+
+    @NotNull(message = "The value must be not null")
+    @NotBlank
+    @Size(min = 13, max = 13)
+    @Column(name = "isbn")
+    private String isbn;
 
     @NotNull(message = "The value must be not null")
     @Column(name = "url")
