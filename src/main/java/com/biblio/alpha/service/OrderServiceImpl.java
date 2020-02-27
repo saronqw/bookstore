@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderEntity> getOrdersByLogin(String login) {
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setCustomerId(customerService.getIdByLogin(login));
+        customerEntity.setCustomerId(customerService.findIdByLogin(login));
         return iOrderRepository.findAllByCustomerId(customerEntity);
     }
 }

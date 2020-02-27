@@ -1,16 +1,15 @@
 package com.biblio.alpha.service;
 
 import com.biblio.alpha.entity.CustomerEntity;
+import com.biblio.alpha.model.api.response.CustomerProfileResponse;
 import com.biblio.alpha.repository.ICustomerRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+
     private ICustomerRepository iCustomerRepository;
 
     public CustomerServiceImpl(ICustomerRepository iCustomerRepository) {
@@ -23,7 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Long getIdByLogin(String login) {
+    public Long findIdByLogin(String login) {
         return iCustomerRepository.getIdByLogin(login).getCustomerId();
+    }
+
+    @Override
+    public CustomerProfileResponse getProfile(String login) {
+        return new CustomerProfileResponse(iCustomerRepository.findByCustomerId(findIdByLogin(login)));
     }
 }

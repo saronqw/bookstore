@@ -1,6 +1,7 @@
 package com.biblio.alpha.controller;
 
 import com.biblio.alpha.entity.CustomerEntity;
+import com.biblio.alpha.model.api.response.CustomerProfileResponse;
 import com.biblio.alpha.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +25,14 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity<List<CustomerEntity>> getList(@PathVariable String login) {
         return ResponseEntity.ok(customerService.getBooksByCustomerLogin(login));
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/profile/{login}",
+            produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<CustomerProfileResponse> getProfile(@PathVariable String login) {
+        return ResponseEntity.ok(customerService.getProfile(login));
     }
 }
