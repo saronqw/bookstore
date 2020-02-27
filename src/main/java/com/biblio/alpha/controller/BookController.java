@@ -28,10 +28,23 @@ public class BookController {
             produces = "application/json")
     @ResponseBody
     public Page<BookEntity> getList(@RequestBody BooksRequest booksRequest) {
+        if(booksRequest.getCount() == null) {
+            booksRequest.setCount(10);
+        }
+
+        if(booksRequest.getTypeSort() == null) {
+            booksRequest.setTypeSort("title");
+        }
+
+        if(booksRequest.getRevert() == null) {
+            booksRequest.setRevert(false);
+        }
+
         if (booksRequest.getRevert()) {
             return bookService.getBooks(PageRequest.of(booksRequest.getPage(), booksRequest.getCount(), Sort.by(booksRequest.getTypeSort()).descending()));
+        } else {
+            return bookService.getBooks(PageRequest.of(booksRequest.getPage(), booksRequest.getCount(), Sort.by(booksRequest.getTypeSort())));
         }
-        return bookService.getBooks(PageRequest.of(booksRequest.getPage(), booksRequest.getCount(), Sort.by(booksRequest.getTypeSort())));
     }
 
     @RequestMapping(
