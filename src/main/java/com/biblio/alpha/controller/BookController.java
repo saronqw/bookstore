@@ -4,8 +4,6 @@ import com.biblio.alpha.entity.BookEntity;
 import com.biblio.alpha.model.api.request.BookParamsRequest;
 import com.biblio.alpha.model.api.request.BooksRequest;
 import com.biblio.alpha.service.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,8 +18,6 @@ public class BookController {
 
     private BookService bookService;
 
-    Logger logger = LoggerFactory.getLogger(BookController.class);
-
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
@@ -32,7 +28,6 @@ public class BookController {
             produces = "application/json")
     @ResponseBody
     public Page<BookEntity> getList(@RequestBody BooksRequest booksRequest) {
-        logger.info(booksRequest.toString());
         if (booksRequest.getRevert()) {
             return bookService.getBooks(PageRequest.of(booksRequest.getPage(), booksRequest.getCount(), Sort.by(booksRequest.getTypeSort()).descending()));
         }
@@ -48,6 +43,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.getBookById(id));
     }
 
+    // DONT WORK
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/{id}",
@@ -67,7 +63,6 @@ public class BookController {
     public ResponseEntity<Boolean> edit(
             @RequestBody BookParamsRequest bookParamsRequest,
             @PathVariable Long id) {
-        logger.info(bookParamsRequest.toString());
         return ResponseEntity.ok(bookService.editBook(bookParamsRequest, id));
     }
 

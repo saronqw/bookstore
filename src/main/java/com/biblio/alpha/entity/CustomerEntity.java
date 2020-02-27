@@ -3,7 +3,10 @@ package com.biblio.alpha.entity;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +23,8 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
-
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
-    private List<OrderEntity>orderEntityList;
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderEntity> orderEntityList = new ArrayList<>();
 
     @Column(name = "first_name")
     private String firstName;
@@ -46,7 +48,7 @@ public class CustomerEntity {
 
     @Min(value = 14, message = "The value must be >= 14")
     @NotNull(message = "The value must be not null")
-    @Column(name = "age", columnDefinition = "")
+    @Column(name = "age")
     private Long age;
 
     @NotNull(message = "The value must be not null")

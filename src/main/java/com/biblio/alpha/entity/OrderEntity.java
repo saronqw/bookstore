@@ -1,6 +1,7 @@
 package com.biblio.alpha.entity;
 
 import com.biblio.alpha.entity.purchase.PurchaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.validation.annotation.Validated;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Validated
@@ -29,19 +31,20 @@ public class OrderEntity {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id")
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customerId")
     private CustomerEntity customerId;
 
     @OneToMany(mappedBy = "id.orderEntity", cascade = CascadeType.ALL)
-    private List<PurchaseEntity> purchaseEntityList;
-
-    public Long getOrderId() {
-        return orderId;
-    }
+    private List<PurchaseEntity> purchaseEntityList = new ArrayList<>();
 
     public List<PurchaseEntity> getPurchaseEntityList() {
         return purchaseEntityList;
+    }
+
+    public Long getOrderId() {
+        return orderId;
     }
 
     public void setOrderId(Long orderId) {
