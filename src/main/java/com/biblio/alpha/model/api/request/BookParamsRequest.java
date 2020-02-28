@@ -2,7 +2,7 @@ package com.biblio.alpha.model.api.request;
 
 public class BookParamsRequest {
 
-    public BookParamsRequest(String author, String cover, Long date, String editor, String genre, Long height, String language, Long length, Long pageNumber, Long price, String publisher, Long rating, String series, String title, String translator, String url, Long weight, Long width) {
+    public BookParamsRequest(String author, String cover, Long date, String editor, String genre, Long height, String language, Long length, Long pageNumber, Long price, String publisher, Double rating, String series, String title, String translator, String url, Long weight, Long width) {
         this.author = author;
         this.cover = cover;
         this.date = date;
@@ -34,7 +34,7 @@ public class BookParamsRequest {
     private Long pageNumber;
     private Long price;
     private String publisher;
-    private Long rating;
+    private Double rating;
     private String series;
     private String title;
     private String translator;
@@ -130,11 +130,11 @@ public class BookParamsRequest {
         this.publisher = publisher;
     }
 
-    public Long getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Long rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

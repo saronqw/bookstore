@@ -3,10 +3,7 @@ package com.biblio.alpha.entity;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +20,6 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderEntity> orderEntityList = new ArrayList<>();
-
     @Column(name = "first_name")
     private String firstName;
 
@@ -34,10 +28,6 @@ public class CustomerEntity {
 
     @Column(name = "middle_name")
     private String middleName;
-
-    public List<OrderEntity> getOrderEntityList() {
-        return orderEntityList;
-    }
 
     @PrePersist
     public void prePersist() {
@@ -51,19 +41,32 @@ public class CustomerEntity {
     @Column(name = "age")
     private Long age;
 
+    @NotEmpty
     @NotNull(message = "The value must be not null")
     @Size(min = 6, max = 30, message = "The value must be in the range of 6 to 30")
     @Column(name = "login")
     private String login;
 
+    @NotEmpty
     @NotNull(message = "The value must be not null")
-    @Size(min = 10, max = 30, message = "The value must be in the range of 10 to 30")
+    @Size(min = 6, max = 30, message = "The value must be in the range of 6 to 30")
     @Column(name = "password")
     private String password;
 
     @Email(regexp = "*@*.*", message = "Email must contain the @ symbol")
     @Column(name = "email")
     private String email;
+
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderEntity> orderEntityList = new ArrayList<>();
+
+    public List<OrderEntity> getOrderEntityList() {
+        return orderEntityList;
+    }
+
+    public void setOrderEntityList(List<OrderEntity> orderEntityList) {
+        this.orderEntityList = orderEntityList;
+    }
 
     public Long getCustomerId() {
         return customerId;
@@ -115,10 +118,6 @@ public class CustomerEntity {
 
     public String getPassword() {
         return password;
-    }
-
-    public void setOrderEntityList(List<OrderEntity> orderEntityList) {
-        this.orderEntityList = orderEntityList;
     }
 
     public void setPassword(String password) {

@@ -1,13 +1,9 @@
 package com.biblio.alpha.entity.rating;
 
-import com.biblio.alpha.entity.BookEntity;
-import com.biblio.alpha.entity.CustomerEntity;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Validated
 @Entity
@@ -20,10 +16,13 @@ public class RatingEntity {
     @EmbeddedId
     private RatingId id;
 
-    @Size(max = 10, message = "The value must be range of 1 to 10")
     @Column(name = "rating")
-    private Long rating;
+    @Min(value = 1, message = "The value must be range of 1 to 10")
+    @Max(value = 10, message = "The value must be range of 1 to 10")
+    private Byte rating;
 
+    @NotEmpty
+    @Size(min = 32, max = 512)
     @Column(name = "review")
     private String review;
 
@@ -36,11 +35,11 @@ public class RatingEntity {
         this.id = id;
     }
 
-    public Long getRating() {
+    public Byte getRating() {
         return rating;
     }
 
-    public void setRating(Long rating) {
+    public void setRating(Byte rating) {
         this.rating = rating;
     }
 

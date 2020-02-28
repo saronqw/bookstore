@@ -45,10 +45,11 @@ public class BookEntity {
     private List<PurchaseEntity> purchaseEntityList = new ArrayList<>();*/
 
     @NotNull(message = "The value must be not null")
+    @NotBlank
     @Column(name = "title")
     private String title;
 
-    @NotEmpty
+    //@NotEmpty - уточнить использование
     @NotBlank
     @NotNull(message = "The value must be not null")
     @Column(name = "author")
@@ -60,12 +61,15 @@ public class BookEntity {
 
     @NotNull(message = "The value must be not null")
     @Min(value = 1, message = "The value must be positive")
+    //@Positive
     @Column(name = "page_num")
     private Long pageNumber;
 
     @Column(name = "editor")
     private String editor;
 
+    @NotBlank
+    @NotNull(message = "The value must be not null")
     @Column(name = "cover")
     private String cover;
 
@@ -76,6 +80,8 @@ public class BookEntity {
     @Column(name = "genre")
     private String genre;
 
+    @NotNull(message = "The value must be not null")
+    @NotEmpty
     @Column(name = "publisher")
     private String publisher;
 
@@ -85,9 +91,13 @@ public class BookEntity {
     @Column(name = "translator")
     private String translator;
 
+    @NotEmpty
+    @NotNull(message = "The value must be not null")
     @Column(name = "language")
     private String language;
 
+    // Дата издания книги
+    @NotNull(message = "The value must be not null")
     @Column(name = "date")  // NEED CHANGE
     private Long date;
 
@@ -103,10 +113,8 @@ public class BookEntity {
     @Column(name = "length")
     private Long length;
 
-    @Min(value = 1, message = "The value must be range of 1 to 10")
-    @Max(value = 10, message = "The value must be range of 1 to 10")
     @Column(name = "rating")
-    private Long rating;
+    private Double rating;
 
     @NotNull(message = "The value must be not null")
     @NotBlank
@@ -115,6 +123,7 @@ public class BookEntity {
     private String isbn;
 
     @NotNull(message = "The value must be not null")
+    @NotEmpty
     @Column(name = "url")
     private String url;
 
@@ -254,11 +263,11 @@ public class BookEntity {
         this.length = length;
     }
 
-    public Long getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Long rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
