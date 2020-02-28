@@ -1,6 +1,6 @@
 package com.biblio.alpha.controller;
 
-import com.biblio.alpha.entity.OrderEntity;
+import com.biblio.alpha.model.api.response.OrderResponse;
 import com.biblio.alpha.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class OrderController {
             path = "/{login}",
             produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<OrderEntity>> getOrdersByLogin(@PathVariable String login) {
+    public ResponseEntity<List<OrderResponse>> getOrdersByLogin(@PathVariable String login) {
         return ResponseEntity.ok(orderService.getOrdersByLogin(login));
     }
 }

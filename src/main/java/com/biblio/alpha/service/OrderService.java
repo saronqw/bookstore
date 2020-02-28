@@ -1,9 +1,9 @@
 package com.biblio.alpha.service;
 
-import com.biblio.alpha.entity.OrderEntity;
+import com.biblio.alpha.model.api.response.OrderResponse;
 
 import java.util.List;
 
 public interface OrderService {
-    List<OrderEntity> getOrdersByLogin(String login);
+    List<OrderResponse> getOrdersByLogin(String login);
 }
