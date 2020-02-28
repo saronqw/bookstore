@@ -12,6 +12,6 @@ public interface BookService {
     Page<BookEntity> getBooks(PageRequest pageRequest);
     BookEntity getBookById(Long id);
     BookEntity add(BookParamsRequest bookParamsRequest);
-    Boolean editBook(BookParamsRequest bookParamsRequest, Long id);
-    void delete(Long id);
+    BookEntity editBook(BookParamsRequest bookParamsRequest, Long id);
+    BookEntity delete(Long id);
 }

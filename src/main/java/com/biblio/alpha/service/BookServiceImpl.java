@@ -27,16 +27,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Boolean editBook(BookParamsRequest bookParamsRequest, Long id) {
+    public BookEntity editBook(BookParamsRequest bookParamsRequest, Long id) {
         BookEntity currentBook = getBookById(id);
         currentBook.edit(bookParamsRequest);
         booksRepository.save(currentBook);
-        return true;
+        return currentBook;
     }
 
     @Override
-    public void delete(Long id) {
+    public BookEntity delete(Long id) {
         booksRepository.deleteByBookId(id);
+        return booksRepository.findAllByBookId(id);
     }
 
     @Override

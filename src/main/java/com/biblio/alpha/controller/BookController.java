@@ -56,7 +56,6 @@ public class BookController {
         return ResponseEntity.ok(bookService.getBookById(id));
     }
 
-    // DONT WORK
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/add",
@@ -74,7 +73,7 @@ public class BookController {
             consumes = "application/json",
             produces = "application/json")
     @ResponseBody
-    public ResponseEntity<Boolean> edit(
+    public ResponseEntity<BookEntity> edit(
             @RequestBody BookParamsRequest bookParamsRequest,
             @PathVariable Long id) {
         return ResponseEntity.ok(bookService.editBook(bookParamsRequest, id));
@@ -85,7 +84,7 @@ public class BookController {
             method = RequestMethod.DELETE,
             path = "/delete/{id}")
     @ResponseBody
-    public void delete(@PathVariable Long id) {
-        bookService.delete(id);
+    public ResponseEntity<BookEntity> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(bookService.delete(id));
     }
 }
