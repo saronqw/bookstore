@@ -1,6 +1,7 @@
 package com.biblio.alpha.entity;
 
 import com.biblio.alpha.model.api.request.BookParamsRequest;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -112,6 +113,13 @@ public class BookEntity {
     @Min(value = 1, message = "The value must be positive")
     @Column(name = "length")
     private Long length;
+
+    @PrePersist
+    void preInsert() {
+        if (rating == null) {
+            rating = 0.0;
+        }
+    }
 
     @Column(name = "rating")
     private Double rating;

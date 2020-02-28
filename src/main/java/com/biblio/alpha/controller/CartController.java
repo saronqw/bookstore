@@ -1,6 +1,5 @@
 package com.biblio.alpha.controller;
 
-import com.biblio.alpha.entity.basket.BasketEntity;
 import com.biblio.alpha.model.api.response.CartResponse;
 import com.biblio.alpha.service.CartService;
 import org.springframework.http.ResponseEntity;
