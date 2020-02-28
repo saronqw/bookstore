@@ -82,7 +82,8 @@ public class BookController {
     @Transactional
     @RequestMapping(
             method = RequestMethod.DELETE,
-            path = "/delete/{id}")
+            path = "/delete/{id}",
+            produces = "application/json")
     @ResponseBody
     public ResponseEntity<BookEntity> delete(@PathVariable Long id) {
         return ResponseEntity.ok(bookService.delete(id));
