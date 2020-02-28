@@ -45,7 +45,24 @@ public class BookParamsRequest {
     private Long width;
 
     public BookParamsRequest(BookEntity bookEntity) {
-
+        this.author = bookEntity.getAuthor();
+        this.cover = bookEntity.getCover();
+        this.date = bookEntity.getDate();
+        this.editor = bookEntity.getEditor();
+        this.genre = bookEntity.getGenre();
+        this.height = bookEntity.getHeight();
+        this.language = bookEntity.getLanguage();
+        this.length = bookEntity.getLength();
+        this.pageNumber = bookEntity.getPageNumber();
+        this.price = bookEntity.getPrice();
+        this.publisher = bookEntity.getPublisher();
+        this.rating = bookEntity.getRating();
+        this.series = bookEntity.getSeries();
+        this.title = bookEntity.getTitle();
+        this.translator = bookEntity.getTranslator();
+        this.url = bookEntity.getUrl();
+        this.weight = bookEntity.getWeight();
+        this.width = bookEntity.getWidth();
     }
 
     public String getAuthor() {

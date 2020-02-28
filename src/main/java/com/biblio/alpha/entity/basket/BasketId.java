@@ -21,6 +21,22 @@ public class BasketId implements Serializable {
     @JoinColumn(name = "customer_id")
     private CustomerEntity customerEntity;
 
+    public BookEntity getBookEntity() {
+        return bookEntity;
+    }
+
+    public void setBookEntity(BookEntity bookEntity) {
+        this.bookEntity = bookEntity;
+    }
+
+    public CustomerEntity getCustomerEntity() {
+        return customerEntity;
+    }
+
+    public void setCustomerEntity(CustomerEntity customerEntity) {
+        this.customerEntity = customerEntity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
