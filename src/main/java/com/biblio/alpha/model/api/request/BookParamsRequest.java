@@ -1,5 +1,7 @@
 package com.biblio.alpha.model.api.request;
 
+import com.biblio.alpha.entity.BookEntity;
+
 public class BookParamsRequest {
 
     public BookParamsRequest(String author, String cover, Long date, String editor, String genre, Long height, String language, Long length, Long pageNumber, Long price, String publisher, Double rating, String series, String title, String translator, String url, Long weight, Long width) {
@@ -41,6 +43,10 @@ public class BookParamsRequest {
     private String url;
     private Long weight;
     private Long width;
+
+    public BookParamsRequest(BookEntity bookEntity) {
+
+    }
 
     public String getAuthor() {
         return author;

@@ -116,11 +116,11 @@ public class BookEntity {
     @Column(name = "rating")
     private Double rating;
 
-    @NotNull(message = "The value must be not null")
+    /*@NotNull(message = "The value must be not null")
     @NotBlank
     @Size(min = 13, max = 13)
     @Column(name = "isbn")
-    private String isbn;
+    private String isbn;*/
 
     @NotNull(message = "The value must be not null")
     @NotEmpty

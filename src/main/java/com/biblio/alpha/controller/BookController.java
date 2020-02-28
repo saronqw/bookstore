@@ -28,15 +28,15 @@ public class BookController {
             produces = "application/json")
     @ResponseBody
     public Page<BookEntity> getList(@RequestBody BooksRequest booksRequest) {
-        if(booksRequest.getCount() == null) {
+        if (booksRequest.getCount() == null) {
             booksRequest.setCount(10);
         }
 
-        if(booksRequest.getTypeSort() == null) {
+        if (booksRequest.getTypeSort() == null) {
             booksRequest.setTypeSort("title");
         }
 
-        if(booksRequest.getRevert() == null) {
+        if (booksRequest.getRevert() == null) {
             booksRequest.setRevert(false);
         }
 
@@ -59,17 +59,18 @@ public class BookController {
     // DONT WORK
     @RequestMapping(
             method = RequestMethod.POST,
-            path = "/{id}",
+            path = "/add",
+            consumes = "application/json",
             produces = "application/json")
     @ResponseBody
-    public ResponseEntity<BookEntity> add(@PathVariable Long id) {
-        return ResponseEntity.ok(bookService.getBookById(id));
+    public ResponseEntity<BookEntity> add(@RequestBody BookParamsRequest bookParamsRequest) {
+        return ResponseEntity.ok(bookService.add(bookParamsRequest));
     }
 
     @Transactional
     @RequestMapping(
             method = RequestMethod.PUT,
-            path = "/{id}",
+            path = "/edit/{id}",
             consumes = "application/json",
             produces = "application/json")
     @ResponseBody
@@ -82,7 +83,7 @@ public class BookController {
     @Transactional
     @RequestMapping(
             method = RequestMethod.DELETE,
-            path = "/{id}")
+            path = "/delete/{id}")
     @ResponseBody
     public void delete(@PathVariable Long id) {
         bookService.delete(id);

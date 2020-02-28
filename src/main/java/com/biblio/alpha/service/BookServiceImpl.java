@@ -39,5 +39,11 @@ public class BookServiceImpl implements BookService {
         booksRepository.deleteByBookId(id);
     }
 
-
+    @Override
+    public BookEntity add(BookParamsRequest bookParamsRequest) {
+        BookEntity addBook = new BookEntity();
+        addBook.edit(bookParamsRequest);
+        booksRepository.save(addBook);
+        return addBook;
+    }
 }

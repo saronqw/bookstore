@@ -9,12 +9,9 @@ import java.awt.print.Book;
 
 
 public interface BookService {
-
     Page<BookEntity> getBooks(PageRequest pageRequest);
-
     BookEntity getBookById(Long id);
-
+    BookEntity add(BookParamsRequest bookParamsRequest);
     Boolean editBook(BookParamsRequest bookParamsRequest, Long id);
-
     void delete(Long id);
 }
